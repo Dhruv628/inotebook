@@ -9,7 +9,7 @@ export const NoteItem = (props) => {
     // Delete a note
 const deleteNote =async (id) => {
     
-    console.log("deleting the node with id :" + id);
+
     const newNotes = notes.filter((note) => {
       return note._id !== id;
     });
@@ -24,15 +24,14 @@ const deleteNote =async (id) => {
     });
     
     const json=response.json()
-    console.log(json);
     props.showAlert('Note deleted','success')
   };
 
 
   return (
   <>
- <div className="col-md-3" > 
-            <div className="card my-3"> 
+ <div className="col-md-3" style={{background:'transparent'}}> 
+            <div className="card my-3" style={{background:'transparent',color:'white',border:'2px solid white'}}> 
                 <div className ="card-body">
                     <div className="d-flex align-items-center">
 

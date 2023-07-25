@@ -93,6 +93,9 @@ setNote({
 
 return (
   <>
+  <div className='bg-dark' style={{padding:'1rem 4rem',borderRadius:'12px'} }>
+
+
       <AddNote showAlert={showAlert}/>
       
 <button type="button"  ref={ref}  className="d-none btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
@@ -132,13 +135,14 @@ return (
 </div>
 
   <div className="row my-3">
-            <h2>Your Notes</h2> 
+            <h2 className='text-white'>Your Notes</h2> 
             <div className="container mx-1">
             {notes.length===0 && 'No notes to display'}
             </div>
             {notes.map((note,index)=>{
                     return <NoteItem note={note} key={index} updateNote={updateNote} showAlert={showAlert}/>  
             })}
+            </div>
             </div>
   </>
   )

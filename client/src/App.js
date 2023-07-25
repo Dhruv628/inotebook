@@ -12,19 +12,17 @@ import {useState } from 'react';
 
 function App() {
   const [alert, setAlert] = useState(null)
-  const showAlert = (message, type)=>{
+  const showAlert = (message,type)=>{
     setAlert({
       msg: message,
-      type: type
+      type: type,
     })
     setTimeout(() => {
         setAlert(null);
     }, 2000);
 }
-
-
-  return (
-    <div style={{ backgroundImage: `url('https://notebook-onthecloud.vercel.app/static/media/bg.f3f682cad15349233b9f.png')`,backgroundRepeat: "no-repeat",backgroundSize: "cover",minHeight: "100vh",    backgroundPosition: 'center' }}>
+ return (
+    <div className='gradient-custom' >
     <NoteState>
     <Router>
     <Navbar showAlert={showAlert} />

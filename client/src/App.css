@@ -1,4 +1,5 @@
 .App {
+ 
   text-align: center;
   background-image: url('https://notebook-onthecloud.vercel.app/static/media/bg.f3f682cad15349233b9f.png');
   background-position: 50%;
@@ -41,3 +42,19 @@
     transform: rotate(360deg);
   }
 }
+.gradient-custom{
+  /* background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1)) */
+}
+#typePasswordX::placeholder {
+/* Change the placeholder color to white */
+  font-size: 1.1rem;
+}
+#typeEmailX::placeholder {
+/* Change the placeholder color to white */
+  font-size: 1.1rem;
+}
+.LgButton:hover{
+  background-color: white;
+}
+
+

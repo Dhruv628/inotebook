@@ -1,10 +1,13 @@
 import React,{useState} from 'react'
-import { useNavigate } from 'react-router-dom';
+import { useNavigate,Link } from 'react-router-dom';
 
 export const Signup = (props) => {
     let navigate = useNavigate();
     
     const [credentials, setCredentials] = useState({name:'',email:'',password:'',cpassword:''})
+    const [eye, seteye] = useState('eye')
+    const [passwordType, setpasswordType] = useState("password");
+   
     
     const onChange=(e)=>{
         setCredentials({
@@ -17,17 +20,16 @@ export const Signup = (props) => {
         if(credentials.password!=='' && credentials.password===credentials.cpassword){
             
            const  {name,email,password}=credentials
-            const response = await fetch("http://localhost:5000/api/auth/createuser", {
+         await fetch("http://localhost:5000/api/auth/createuser", {
                 method: "POST", 
                 headers: {
                  "Content-Type": "application/json",
                 },
                 body: JSON.stringify({name,email,password}),
             });
-            const json=await response.json()
-            console.log(json)
-            localStorage.setItem('token',json.authtoken)
+          
             navigate("/login")
+            props.showAlert('Account created','success')
         }
         else{
             props.showAlert('Enter correct credentials','danger')
@@ -39,33 +41,77 @@ export const Signup = (props) => {
        
   return (
     <>
+     <section className="">
+  <div className="container  h-100" >
+    <div className="row d-flex justify-content-center align-items-center h-100">
+      <div className="col-12 col-md-8 col-lg-6 col-xl-5">
+        <div className="card bg-dark text-white" style={{borderRadius: "1rem"}}>
+          <div className="card-body p-5 text-center">
 
-    <div className='container'>
-    
-      <h3 className='mt-3'>Sign Up</h3>
-      <h6 className='my-4'>New to iNotebook? Create an account</h6>
-    <form className="" onSubmit={handleClick}>
-    <div className="my-2">
-      <label htmlFor="name" className="form-label">Name</label>
-      <input type="text" className="form-control" id="name" placeholder='Username*' name="name" value={credentials.name}  onChange={onChange} />
+            <div className="mb-md-5 mt-md-4 ">
+
+              <h2 className="fw-bold mb-2 text-uppercase">Signup</h2>
+              <p className="text-white-50 mb-5 ">Please enter your details!</p>
+               <form action="" onSubmit={handleClick}>
+             {/* Username */}
+              <div className="form-outline form-white mb-4">
+                <input style={{
+      border: '1.5px solid white',
+      outline: 'none',
+      boxShadow: 'none',
+      fontSize:'1rem',
+      backgroundColor:'transparent',
+    }} type="text" onChange={onChange} id="name" name="name" value={credentials.name} placeholder='Username' className="form-control form-control-lg text-white " />
+              </div>
+              {/* Email */}
+              <div className="form-outline form-white mb-4">
+                <input style={{
+      border: '1.5px solid white',
+      outline: 'none',
+      boxShadow: 'none',
+      fontSize:'1rem',
+      backgroundColor:'transparent',
+    }}type="email" id="email " placeholder='Email' name="email"  value={credentials.email} onChange={onChange}  className="form-control form-control-lg text-white " />
+              </div>
+              {/* Passowd  */}
+              <div className="form-outline form-white mb-4" style={{display:'flex',border:'1.5px solid white',alignItems:'center',borderRadius:'4px'}}>
+                <input  style={{
+      border: 'none',
+      outline: 'none',
+      boxShadow: 'none',
+      fontSize:'1rem',
+      backgroundColor:'transparent',
+    }}  type={`${passwordType}`} id="password " name="password" placeholder='Password'  minLength={5} required value={credentials.password} onChange={onChange} className="form-control form-control-lg  text-white"/>
+                <i onClick={()=>{eye==='eye'?seteye("eye-slash"):seteye("eye")
+                 eye==='eye'?setpasswordType("text"):setpasswordType("password")}}
+                className={`fa-solid fa-${eye} `} style={{marginRight:'6px'}}></i>
+              </div>
+              {/* Confirm Passowrd  */}
+              <div className="form-outline form-white mb-4" style={{display:'flex',border:'1.5px solid white',alignItems:'center',borderRadius:'4px'}}>
+                <input  style={{
+      border: 'none',
+      outline: 'none',
+      boxShadow: 'none',
+      fontSize:'1rem',
+      backgroundColor:'transparent',
+    }}  type={`${passwordType}`} id="cpassword " name="cpassword"  placeholder='Confirm password'  minLength={5} required  value={credentials.cpassword} onChange={onChange} className="form-control form-control-lg  text-white"/>
+                <i onClick={()=>{eye==='eye'?seteye("eye-slash"):seteye("eye")
+                 eye==='eye'?setpasswordType("text"):setpasswordType("password")}}
+                className={`fa-solid fa-${eye} `} style={{marginRight:'6px'}}></i>
+              </div>
+              <button className="btn btn-outline-light btn-lg px-5" type="submit">Signup</button>
+              </form>
+            </div>
+            <div>
+              <p className="mb-0">Already have an account? <Link style={{textDecoration:'none'}} to="/login" className="text-white fw-bold">Login</Link>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-    <div className="my-2">
-      <label htmlFor="inputEmail4" className="form-label">Email</label>
-      <input type="email" className="form-control" id="email " placeholder='Email*' name="email"  value={credentials.email} onChange={onChange}  />
-    </div>
-    <div className="my-2">
-      <label htmlFor="password" className="form-label">Password</label>
-      <input type="password" className="form-control" id="password " name="password" placeholder='Password*'  minLength={5} required value={credentials.password} onChange={onChange}  />
-    </div>
-    <div className="my-2">
-      <label htmlFor="cpassword" className="form-label">Confirm password</label>
-      <input type="password" className="form-control" id="cpassword " name="cpassword"  placeholder='Confirm password*'  minLength={5} required  value={credentials.cpassword} onChange={onChange}/>
-    </div>
-    <div className="my-2">
-      <button type="submit" className="btn btn-info my-3" style={{color:'white'}}>Sign up</button>
-    </div>
-  </form>
   </div>
+</section>
   </>
   )
 }

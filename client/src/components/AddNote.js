@@ -1,6 +1,7 @@
 import React,{useState,useContext} from 'react'
 import noteContext from '../context/note/noteContext'
 
+
 export const AddNote = (props) => {
     const context = useContext(noteContext)
     const {notes,setNotes}=context
@@ -34,22 +35,19 @@ setNote({
 })
 }
   return (
-    <div className=' ' style={{margin:'1vh'}}>    
-        <h1>Add a Note</h1>
-    <form>
-  <div className="mb-3">
-    <label htmlFor="title" className="form-label" >Title</label>
-    <input type="text" className="form-control" id="title" name='title' aria-describedby="emailHelp" value={note.title}  onChange={onChange} minLength={5} required/>
+    <div className='' style={{margin:'1vh'}}>    
+        <h1 className='text-white'>Add a Note</h1>
+    <form style={{paddingTop:"1.5rem",paddingBottom:'1.5rem'}} >
+  <div className="mb-4">
+    <input type="text" style={{backgroundColor:'transparent'}} placeholder="Title" className="form-control text-white" id="title" name='title' aria-describedby="emailHelp" value={note.title}  onChange={onChange} minLength={5} required/>
   </div>
-  <div className="mb-3">
-    <label htmlFor="description" className="form-label" name='description'>Description</label>
-    <input type="text" className="form-control" id="description" name='description'  value={note.description}  onChange={onChange} minLength={5} required/>
+  <div className="mb-4">
+    <input style={{backgroundColor:'transparent'}} type="text" placeholder="Description"  className="form-control text-white" id="description" name='description'  value={note.description}  onChange={onChange} minLength={5} required/>
   </div>
-  <div className="mb-3">
-    <label htmlFor="tag" className="form-label" name='tag'>Tag</label>
-    <input type="text" className="form-control" id="tag" name='tag'  value={note.tag}  onChange={onChange}/>
+  <div className="mb-4">
+    <input style={{backgroundColor:'transparent'}} type="text" placeholder="Tag"  className="form-control text-white" id="tag" name='tag'  value={note.tag}  onChange={onChange}/>
   </div>
-  <button disabled={note.title.length<3 && note.description.length<5} type="submit" className="btn btn-info" style={{color:'white'}} onClick={handleClick}>Add Note</button>
+  <button disabled={note.title.length<3 } type="submit" className="btn" id='addnotebutton' style={{border:"2px solid white",color:'white',borderRadius:'7px',backgroundColor:"transparent"}} onClick={handleClick}>Add note</button>
 </form>
 </div>
   )
